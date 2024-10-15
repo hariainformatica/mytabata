@@ -50,18 +50,22 @@ fun Counter(modifier: Modifier = Modifier) {
             modifier = modifier
         )
         Button(onClick = {
+            var myCounter = object : CountDownTimer(30000, 1000) {
+
+                override fun onTick(millisUntilFinished: Long) {
+                    theCounter = millisUntilFinished / 1000
+                }
+
+                override fun onFinish() {
+                    counterState = false
+                }
+            }
+
             if (!counterState) {
-                object : CountDownTimer(30000, 1000) {
-
-                    override fun onTick(millisUntilFinished: Long) {
-                        theCounter = millisUntilFinished / 1000
-                    }
-
-                    override fun onFinish() {
-                        counterState = false
-                    }
-                }.start()
+                myCounter.start()
                 counterState = true
+            } else {
+                myCounter.cancel()
             }
         }) {
             Text(
