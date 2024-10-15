@@ -1,6 +1,7 @@
 package org.iesharia.mytabata
 
 import android.os.Bundle
+import android.os.CountDownTimer
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -37,13 +38,26 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Counter(modifier: Modifier = Modifier) {
-    var theCounter by remember { mutableStateOf("00") }
+    var theCounter by remember { mutableStateOf(0L) }
+
+
+
     Column {
         Text(
-            text = theCounter,
+            text = theCounter.toString(),
             modifier = modifier
         )
-        Button(onClick = {}) {
+        Button(onClick = {
+            object : CountDownTimer(30000, 1000) {
+
+                override fun onTick(millisUntilFinished: Long) {
+                    theCounter = millisUntilFinished / 1000
+                }
+
+                override fun onFinish() {
+                }
+            }.start()
+        }) {
             Text(
                 text = "Pulsar"
             )
