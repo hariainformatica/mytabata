@@ -1,2 +1,2 @@
 # mytabata
-Es un contador de intervalos del tipo tabata
+Es un contador de intervalos del tipo tabata 2
